@@ -1,0 +1,41 @@
+node_modules/
+dist/
+dist-electron/
+*.log
+
+# Local application data and SQLite sidecars
+*.sqlite
+*.sqlite3
+*.db
+*.sqlite-*
+*.sqlite3-*
+*.db-*
+userData/
+app-data/
+
+# Environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets*
+settings.json
+.npmrc
+.aws/
+.ssh/
+
+# Packaging, caches and machine-specific files
+out/
+release/
+coverage/
+.cache/
+*.tsbuildinfo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

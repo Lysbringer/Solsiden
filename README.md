@@ -43,4 +43,3 @@ Hover or focus a library entry to reveal its trash button. Deletion requires an 
 ## Phase 2.7 multi-select library
 
 Use checkboxes or Ctrl+Click to toggle selection and Shift+Click for a range. Normal clicks still open articles. With the library focused, Ctrl+A selects all visible articles and Escape clears selection. Delete selected asks for one confirmation; deletion is all-or-none. Selection is separate from the open article and is limited to visible search results. Individual trash actions and manual Save/Save As remain available.
-

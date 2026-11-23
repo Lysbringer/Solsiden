@@ -1,0 +1,6 @@
+﻿import React,{useEffect,useRef,useState} from 'react';
+export function SaveAsDialog({initialTitle,busy,error,onSave,onCancel}:{initialTitle:string;busy:boolean;error:string;onSave:(title:string)=>Promise<boolean>;onCancel:()=>void}) {
+ const dialog=useRef<HTMLDialogElement>(null);const input=useRef<HTMLInputElement>(null);const [title,setTitle]=useState(initialTitle);
+ useEffect(()=>{const element=dialog.current!;element.showModal();input.current?.select();return ()=>element.close();},[]);
+ return <dialog ref={dialog} className="save-as-dialog" aria-labelledby="save-as-title" onCancel={event=>{event.preventDefault();if(!busy)onCancel();}}><form onSubmit={async event=>{event.preventDefault();if(!busy&&title.trim())await onSave(title.trim());}}><h2 id="save-as-title">Save As</h2><p>Create an independent copy in your local article library.</p><label htmlFor="copy-name">Article name</label><input ref={input} id="copy-name" autoFocus required value={title} disabled={busy} onChange={event=>setTitle(event.target.value)}/>{error&&<p role="alert" className="save-dialog-error">{error}</p>}<div className="actions"><button type="button" disabled={busy} onClick={onCancel}>Cancel</button><button type="submit" className="new" disabled={busy||!title.trim()}>{busy?'Saving...':'Save copy'}</button></div></form></dialog>;
+}

@@ -1,0 +1,7 @@
+import React,{useEffect,useRef} from 'react';
+export function DeleteArticleDialog({title,count=1,unsaved,busy,error,onDelete,onCancel}:{title:string;count?:number;unsaved:boolean;busy:boolean;error:string;onDelete:()=>void;onCancel:()=>void}) {
+ const dialog=useRef<HTMLDialogElement>(null);
+ useEffect(()=>{const element=dialog.current!;element.showModal();return ()=>element.close();},[]);
+ return <dialog ref={dialog} className="save-as-dialog" aria-labelledby="delete-title" onCancel={event=>{event.preventDefault();if(!busy)onCancel();}}><h2 id="delete-title">{count===1?'Delete article?':'Delete selected articles?'}</h2><p>{count===1?<>Delete <strong>{title}</strong> (1 article)</>:<>Delete <strong>{count} selected articles</strong></>} from your local article library? This cannot be undone in the app.</p>{unsaved&&<p className="delete-warning">This article is open with unsaved changes. Deleting it will also discard those changes.</p>}{error&&<p role="alert" className="save-dialog-error">{error}</p>}<div className="actions"><button autoFocus disabled={busy} onClick={onCancel}>Cancel</button><button className="danger" disabled={busy} onClick={onDelete}>{busy?'Deleting...':count===1?'Delete article':'Delete '+count+' articles'}</button></div></dialog>;
+}
+export function TrashIcon(){return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></svg>;}
